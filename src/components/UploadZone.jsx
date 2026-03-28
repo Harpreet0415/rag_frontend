@@ -2,7 +2,7 @@ import { useState, useRef } from 'react'
 import './UploadZone.css'
 
 // Use environment variable for API URL, fallback to localhost for development
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+const API_BASE = 'https://rag-backend-1-jl5r.onrender.com/api'
 
 export default function UploadZone({ onDocumentLoaded, isLoading, setIsLoading }) {
   const [isDragging, setIsDragging] = useState(false)
