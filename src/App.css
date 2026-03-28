@@ -1,0 +1,147 @@
+/* ─── App Layout ─── */
+.app {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ─── Background Auroras ─── */
+.bg-orbs {
+    position: fixed;
+    inset: -50%;
+    pointer-events: none;
+    z-index: 0;
+    width: 200%;
+    height: 200%;
+    background:
+        radial-gradient(circle at 50% 50%, rgba(121, 40, 202, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 80% 20%, rgba(255, 0, 128, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 20% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 40%);
+    animation: slow-spin 40s linear infinite;
+    transform-origin: center center;
+}
+
+@keyframes slow-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ─── Landing Layout ─── */
+.landing-layout {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    overflow: hidden auto;
+}
+
+/* Loading overlay */
+.loading-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(5, 5, 16, 0.85);
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading-card {
+    padding: 40px 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+    max-width: 380px;
+}
+
+@keyframes spin-lg {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-spinner-large {
+    width: 56px;
+    height: 56px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin-lg 1s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    background: conic-gradient(from 0deg, #FF0080, #7928CA, #06B6D4, #FF0080);
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), black 0);
+    mask: radial-gradient(farthest-side, transparent calc(100% - 3px), black 0);
+}
+
+.loading-text {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.loading-sub {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.loading-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    margin-top: 8px;
+}
+
+@keyframes step-in {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.loading-step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    opacity: 0;
+    animation: step-in 0.5s ease forwards;
+}
+
+.step-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-purple);
+    flex-shrink: 0;
+}
+
+/* ─── Chat Layout ─── */
+.chat-layout {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
