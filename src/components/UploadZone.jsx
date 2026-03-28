@@ -1,7 +1,8 @@
 import { useState, useRef } from 'react'
 import './UploadZone.css'
 
-const API_BASE = 'http://localhost:5000/api'
+// Use environment variable for API URL, fallback to localhost for development
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
 
 export default function UploadZone({ onDocumentLoaded, isLoading, setIsLoading }) {
   const [isDragging, setIsDragging] = useState(false)
@@ -10,6 +11,9 @@ export default function UploadZone({ onDocumentLoaded, isLoading, setIsLoading }
   const [showKeyInput, setShowKeyInput] = useState(!localStorage.getItem('gemini_api_key'))
   const [error, setError] = useState('')
   const fileInputRef = useRef(null)
+
+  // Log the API URL for debugging
+  console.log('API_BASE URL:', API_BASE)
 
   const handleDrop = (e) => {
     e.preventDefault()
@@ -42,6 +46,7 @@ export default function UploadZone({ onDocumentLoaded, isLoading, setIsLoading }
     formData.append('session_id', `session_${Date.now()}`)
 
     try {
+      console.log(`Uploading to: ${API_BASE}/upload`)
       const resp = await fetch(`${API_BASE}/upload`, {
         method: 'POST',
         headers: { 'X-Gemini-Key': apiKey.trim() },
@@ -51,6 +56,7 @@ export default function UploadZone({ onDocumentLoaded, isLoading, setIsLoading }
       if (!resp.ok) throw new Error(data.error || 'Upload failed')
       onDocumentLoaded(data)
     } catch (err) {
+      console.error('Upload error:', err)
       setError(err.message)
     } finally {
       setIsLoading(false)
